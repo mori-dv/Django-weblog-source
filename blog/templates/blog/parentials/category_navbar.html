@@ -1,0 +1,19 @@
+<div class="collapse navbar-collapse navbar" id="navbarResponsive" role="navigation">
+    <ul class="navbar-nav ms-auto py-4 py-lg-0 unorder-list">
+        <li class="nav-item li">
+            <a class="nav-link px-lg-3 py-3 py-lg-4 a" href="{% url 'blog:home' %}">خانه</a>
+        </li>
+        {% for category in category %}
+            {% if category.parent == None %}
+                <li class="nav-item menu-item li">
+                    <a class="nav-link px-lg-3 py-3 py-lg-4 a" href="{% url 'blog:category' category.slug %}">
+                        {{category.title}}
+                    </a>
+                    {% if category.children.active %}
+                        {% include 'blog/parentials/category_nav_loop.html' %}
+                    {% endif %}
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
