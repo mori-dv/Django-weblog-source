@@ -22,7 +22,8 @@ class Category(models.Model):
         'self',
         on_delete=models.SET_NULL,
         related_name='children',
-        null=True, blank=True,
+        null=True,
+        blank=True,
         default=None,
         verbose_name='زیردسته'
     )
@@ -65,9 +66,6 @@ class Article(models.Model):
     def jmodified(self):
         return jalali_time(self.modified)
     jmodified.short_description = "زمان انتشار"
-
-    def valid_category(self):
-        return self.category.filter(situation=True)
 
     def image_tag(self):
         return format_html("<img src='{}' width=80 height=60 style='border-radius: 6px;'>".format(self.imgage.url))
