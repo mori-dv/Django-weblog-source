@@ -1,8 +1,9 @@
 from django.db import models
+from django.db.models.deletion import SET_NULL
 from django.utils.html import format_html
 from django.utils import timezone
 from .extentions.utils import jalali_time
-
+from django.contrib.auth.models import User
 
 # my managers
 class ArticleManager(models.Manager):
@@ -55,7 +56,7 @@ class Article(models.Model):
     modified = models.DateTimeField(default=timezone.now, verbose_name="زمان انتشار")
     created = models.DateTimeField(auto_now_add=True, verbose_name="زمان تولید")
     update = models.DateTimeField(auto_now=True, verbose_name="زمان ویرایش")
-    author = models.CharField(max_length=100, verbose_name="نوشته شده توسط")
+    author = models.ForeignKey(User, null=True, on_delete=SET_NULL, related_name='articles', verbose_name='نویسنده')
     situation = models.CharField(max_length=1, choices=CHOICES, verbose_name="وضعیت پست")
     
     class Meta:
