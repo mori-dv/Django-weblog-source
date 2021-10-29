@@ -30,7 +30,7 @@ class ArticleDetailView(DetailView):
 #         'category': category,
 #         'articles': pages
 #     }
-#     return render(request, 'blog/category.html', context)
+#     return render(request, 'blog/category_list.html', context)
 
 class CategoryList(ListView):
     paginate_by = 2
