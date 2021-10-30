@@ -33,7 +33,11 @@ def category(request, slug, page=1):
     }
     return render(request, 'blog/category_list.html', context)
 
+# pagination doesn't work and got error
+# if you can fix it, do it :)
+
 # class CategoryList(ListView):
+#     paginate_by = 2
 #     template_name = 'blog/category_list.html'
 #     def get_queryset(self):
 #         global category 
