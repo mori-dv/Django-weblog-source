@@ -21,7 +21,7 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            {% for article in object_list %}
+            {% for article in articles %}
                 <!-- Post preview-->
                 <div class="post-preview">
                     <small>
@@ -34,29 +34,27 @@
                         <h4 class="post-subtitle"> {{ article.subtitle }} </h4>
                     </a>
                     
-                    <p class="post-meta">
+                    <div class="post-meta">
                         نوشته شده توسط :‌
                         <a href="#!"> {{article.author}} </a>
-                        {{article.jmodified}}
-                    </p>
+                        <div class='modified-date'>{{article.jmodified}}</div>
+                    </div>
                 </div>
                 <!-- Divider-->
                 <hr class="my-4" />
             {% endfor %}
             <!-- Pager-->
             <div class="d-flex justify-content-end mb-4">
-                {% if is_paginated %}
-                    {% if page_obj.has_next %}
-                    <a class="btn btn-primary text-uppercase m-xl-1" href="{% url 'blog:category' category.slug articles.next_page_number %}">
-                        صفحه بعد &larr;
-                    </a>
+                    {% if articles.has_next %}
+                        <a class="btn btn-primary text-uppercase m-xl-1" href="{% url 'blog:category' category.slug articles.next_page_number %}">
+                            صفحه بعد &larr;
+                        </a>
                     {% endif %}
-                    {% if page_obj.has_previous %}
-                    <a class="order-first btn btn-primary text-uppercase m-xl-1" href="{% url 'blog:category' category.slug articles.previous_page_number %}">
-                        &rarr; صفحه قبل
-                    </a>
+                    {% if articles.has_previous %}
+                        <a class="order-first btn btn-primary text-uppercase m-xl-1" href="{% url 'blog:category' category.slug articles.previous_page_number %}">
+                            &rarr; صفحه قبل
+                        </a>
                     {% endif %}
-                {% endif %}
             </div>
         </div>
     </div>

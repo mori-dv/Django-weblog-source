@@ -62,3 +62,7 @@ ul li ul li {
   clear: both;
   width: 100%;
 }
+.modified-date {
+  display:inline-block;
+  margin-right:5px;
+}
