@@ -12,14 +12,15 @@ class ArticleListView(ListView):
     model = Article
     queryset = Article.objects.published()
     paginate_by = 3
-
+    context_object_name = 'articles'
 
 # each article's page
 class ArticleDetailView(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
         return get_object_or_404(Article.objects.published(), slug=slug)
-
+    
+    
 
 # each category's page
 def category(request, slug, page=1):
@@ -53,12 +54,12 @@ def category(request, slug, page=1):
 
 class AuthorList(ListView):
     template_name = 'blog/author_list.html'
-
+        
     def get_queryset(self):
         global author 
         username = self.kwargs.get('username')
         author = get_object_or_404(User, username=username)
-        return author.article.published()
+        return author.articles.published()
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

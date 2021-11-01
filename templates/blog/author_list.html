@@ -1,1 +1,13 @@
-some thing
+{% extends 'blog/base_list_articles.html' %}
+
+{% block header %}
+    <h1>{{author.get_full_name}}</h1>
+{% endblock %}
+
+{% block url_next %}
+    {% url 'blog:category' category.slug articles.next_page_number %}
+{% endblock %}
+
+{% block url_previous %}
+    {% url 'blog:category' category.slug articles.previous_page_number %}
+{% endblock %}

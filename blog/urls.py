@@ -7,6 +7,6 @@ urlpatterns = [
     path('article/<slug:slug>', ArticleDetailView.as_view(), name='article_detail'),
     path('category/<slug:slug>', category, name='category'),
     path('category/<slug:slug>/page/<int:page>', category, name='category'),
-    path('author/<slug:username>', AuthorList, name='author'),
-    path('author/<slug:username>/page/<int:page>', AuthorList, name='author'),
+    path('author/<slug:username>', AuthorList.as_view(), name='author'),
+    path('author/<slug:username>/page/<int:page>', AuthorList.as_view(), name='author'),
 ]

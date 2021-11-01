@@ -1,62 +1,13 @@
-{% extends 'blog/base.html' %}
+{% extends 'blog/base_list_articles.html' %}
 
-{% load static %}
-{% block main %}
+{% block header %}
+    <h1>{{category.title}}</h1>
+{% endblock %}
 
-<!-- Page Header-->
-<header class="masthead" style="background-image: url('{% static "blog/assets/img/home-bg.jpg" %}')">
-    <div class="container position-relative px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <div class="site-heading">
-                    <h1>{{category.title}}</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+{% block next_page_url %}
+    {% url 'blog:category' category.slug articles.next_page_number %}
+{% endblock %}
 
-
-<!-- Main Content-->
-<div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-            {% for article in articles %}
-                <!-- Post preview-->
-                <div class="post-preview">
-                    <small>
-                        {% for category in article.category.active %}
-                          <a href="{% url 'blog:category' category.slug %}">{{category}}</a>  
-                        {% endfor %}
-                    </small>
-                    <a href="{% url 'blog:article_detail' article.slug %} ">
-                        <h2 class="post-title"> {{ article.title }} </h2>
-                        <h4 class="post-subtitle"> {{ article.subtitle }} </h4>
-                    </a>
-                    
-                    <div class="post-meta">
-                        نوشته شده توسط :‌
-                        <a href="#!"> {{article.author}} </a>
-                        <div class='modified-date'> {{article.jmodified}} </div>
-                    </div>
-                </div>
-                <!-- Divider-->
-                <hr class="my-4" />
-            {% endfor %}
-            <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4">
-                    {% if articles.has_next %}
-                        <a class="btn btn-primary text-uppercase m-xl-1" href="{% url 'blog:category' category.slug articles.next_page_number %}">
-                            صفحه بعد &larr;
-                        </a>
-                    {% endif %}
-                    {% if articles.has_previous %}
-                        <a class="order-first btn btn-primary text-uppercase m-xl-1" href="{% url 'blog:category' category.slug articles.previous_page_number %}">
-                            &rarr; صفحه قبل
-                        </a>
-                    {% endif %}
-            </div>
-        </div>
-    </div>
-</div>
+{% block previous_page_url %}
+    {% url 'blog:category' category.slug articles.previous_page_number %}
 {% endblock %}
