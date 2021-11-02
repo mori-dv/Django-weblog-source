@@ -21,7 +21,7 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-            {% for article in articles %}
+            {% for article in page_obj %}
                 <!-- Post preview-->
                 <div class="post-preview">
                     <small>
@@ -36,7 +36,7 @@
                     
                     <div class="post-meta">
                         نوشته شده توسط :‌
-                        <a href="{% url 'blog:author' article.author %}"> {{article.author}} </a>
+                        <a href="{% url 'blog:author' article.author %}"> {{ article.author.get_full_name }} </a>
                         <div class='modified-date'>
                            {{article.jmodified}} 
                         </div>

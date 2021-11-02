@@ -11,7 +11,6 @@ class ArticleListView(ListView):
     model = Article
     queryset = Article.objects.published()
     paginate_by = 3
-    context_object_name = 'articles'
 
 # each article's page
 class ArticleDetailView(DetailView):
@@ -37,7 +36,6 @@ class ArticleDetailView(DetailView):
 class CategoryList(ListView):
     paginate_by = 2
     template_name = 'blog/category_list.html'
-    context_object_name = 'articles'
 
     def get_queryset(self):
         global category 
@@ -53,7 +51,6 @@ class CategoryList(ListView):
 
 class AuthorList(ListView):
     template_name = 'blog/author_list.html'
-    context_object_name = 'articles'
     paginate_by = 3
 
     def get_queryset(self):

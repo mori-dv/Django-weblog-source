@@ -29,6 +29,9 @@ def make_draft(modeladmin, request, queryset):
 # Register your models here.
 class AdminInterface(admin.ModelAdmin):
     list_display = ('image_tag', 'title', 'category_to_str', 'jmodified', 'author', 'situation')
+    list_filter = ('modified','author','situation',)
+    search_fields = ('title','discribtion')
+    prepopulated_fields = {'slug':('title',)}
     actions = [make_published, make_draft]
 
     def category_to_str(self, obj):
@@ -58,6 +61,8 @@ def make_unavailable(modeladmin, request, queryset):
 
 class CategoryInterface(admin.ModelAdmin):
     list_display = ('position', 'title', 'parent', 'slug', 'situation',)
+    list_filter = (['situation'])
+    search_fields = ('title','discribtion')
     actions = [make_available, make_unavailable]
 
 
