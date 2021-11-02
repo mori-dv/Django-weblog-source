@@ -36,7 +36,7 @@
                     
                     <div class="post-meta">
                         نوشته شده توسط :‌
-                        <a href="#"> {{article.author}} </a>
+                        <a href="{% url 'blog:author' article.author %}"> {{article.author}} </a>
                         <div class='modified-date'>
                            {{article.jmodified}} 
                         </div>
@@ -47,18 +47,20 @@
                 <hr class="my-4" />
             {% endfor %}
             <!-- Pager-->
-                <div class="d-flex justify-content-end mb-4">
-                    {% if articles.has_next %}
-                    <a class="btn btn-primary text-uppercase m-xl-1" href="{% block next_page_url %}{% endblock %}">
+            {% if is_paginated %}
+                <div class="d-flex justify-content-end mb-4 pagination">
+                    {% if page_obj.has_next %}
+                    <a class="btn btn-primary text-uppercase m-xl-1" href="{% block next_url %}{% endblock %}">
                         صفحه بعد &larr;
                     </a>
                     {% endif %}
-                    {% if articles.has_previous %}
-                    <a class="order-first btn btn-primary text-uppercase m-xl-1" href="{% block previous_page_url %}{% endblock %}">
+                    {% if page_obj.has_previous %}
+                    <a class="order-first btn btn-primary text-uppercase m-xl-1" href="{% block previous_url %}{% endblock %}">
                         &rarr; صفحه قبل
                     </a>
                     {% endif %}
                 </div>
+            {% endif %}
         </div>
     </div>
 </div>

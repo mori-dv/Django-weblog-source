@@ -1,13 +1,13 @@
-{% extends 'blog/base_list_articles.html' %}
+{% extends 'blog/base_list.html' %}
 
 {% block header %}
     <h1>{{category.title}}</h1>
 {% endblock %}
 
-{% block next_page_url %}
-    {% url 'blog:category' category.slug articles.next_page_number %}
+{% block next_url %}
+    {% url 'blog:category' category.slug page_obj.next_page_number %}
 {% endblock %}
 
-{% block previous_page_url %}
-    {% url 'blog:category' category.slug articles.previous_page_number %}
+{% block previous_url %}
+    {% url 'blog:category' category.slug page_obj.previous_page_number %}
 {% endblock %}
