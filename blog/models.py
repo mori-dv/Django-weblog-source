@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models.deletion import SET_NULL
 from django.utils.html import format_html
 from django.utils import timezone
-from .extentions.utils import jalali_time
+from .extentions.utils import jalali_date, jalali_time
 from django.contrib.auth.models import User
 
 # my managers
@@ -64,13 +64,20 @@ class Article(models.Model):
         verbose_name_plural = 'مقالات'
         ordering = ['title', 'situation']
 
-    def jmodified(self):
+    def jmodified(self): # show persian date and time
         return jalali_time(self.modified)
     jmodified.short_description = "زمان انتشار"
+
+    def jdate(self):  # show persian date without time (used in account panel)
+        return jalali_date(self.modified) 
 
     def image_tag(self):
         return format_html("<img src='{}' width=80 height=60 style='border-radius: 6px;'>".format(self.imgage.url))
     image_tag.short_description = 'تصویر مقاله'
+    
+    def category_to_str(self):
+        return ",".join([category.title for category in self.category.active()])
+    category_to_str.short_description = 'دسته‌بندی'
 
     def __str__(self):
         return self.title

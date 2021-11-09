@@ -1,0 +1,51 @@
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css');
+
+body, html{
+    text-align: right !important;
+    direction: rtl !important;
+    font-family: 'Vazir', Arial, sans-serif !important;
+}
+.input100 {
+    font-family: 'Vazir', Arial, sans-serif;
+    padding: 0 15px 0 5px;
+}
+.login100-form-btn,
+.login100-form-title,
+.txt1 {
+    font-family: 'Vazir', Arial, sans-serif;
+}
+.input100:-ms-input-placeholder,
+.input100:-moz-placeholder,
+.input100::-moz-placeholder,
+.input100::-webkit-input-placeholder {
+    font-family: 'Vazir', Arial, sans-serif;
+}
+.label-checkbox100::before {
+    right:0;
+}  
+.label-checkbox100 {
+    padding-right: 30px;
+    font-family: 'Vazir', Arial, sans-serif;
+}
+.alert-validate::before {
+    right: auto;
+    left:0;    
+    padding-left: 15px;
+    padding-right: 5px;
+    font-family: 'Vazir', Arial, sans-serif;
+
+}
+.alert-validate::after {
+    right: auto;
+    left: 5px;
+    text-align: right;
+}
+.error {
+    text-align: justify;
+    padding-bottom: 25px;
+    font-weight: 500;
+}
+.error i {
+    font-size: 30px;
+    color: red;
+}

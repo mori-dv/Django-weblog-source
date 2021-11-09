@@ -1,6 +1,11 @@
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css');
+
 body{
   direction: rtl;
   text-align: right;
+}
+html * {
+  font-family: 'Vazir', Arial, sans-serif !important;
 }
 .post-meta {
   text-align: left;

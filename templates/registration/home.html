@@ -1,0 +1,54 @@
+{% extends 'registration/base.html' %}
+
+{% block tab_title %} | {{user.get_full_name}}{% endblock %}
+
+{% block title %}
+    لیست مقالات
+{% endblock %}
+
+{% block main %}
+    <div class="row m-2">
+        <div class="col-12">
+        <div class="card">
+            <div class="card-body table-responsive p-0">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>تصویر</th>
+                    <th>عنوان</th>
+                    <th>تاریخ‌انتشار</th>
+                    <th>دسته‌بندی</th>
+                    <th>نویسنده</th>
+                    <th>وضعیت‌پست</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for article in object_list %}
+                        <tr>
+                            <td>{{article.image_tag}}</td>
+                            <td>{{article.title}}</td>
+                            <td>{{article.jdate}}</td>
+                            <td>{{article.category_to_str}}</td>
+                            <td>{{article.author.get_full_name}}</td>
+                            <td>
+                                {% if article.situation == 'p' %}
+                                    <span class="badge badge-success">منتشرشده</span>
+                                    <span class="badge badge-primary">
+                                        <a target="_blank" href="{% url 'blog:article_detail' article.slug %}" class="text-decoration-none text-white">نمایش‌درسایت</a>
+                                    </span>
+                                {% else %}
+                                    <span class="badge badge-danger">پیش‌نویس</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+        </div>
+    </div>
+    
+{% endblock %} 

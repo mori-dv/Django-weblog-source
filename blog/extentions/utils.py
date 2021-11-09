@@ -1,5 +1,7 @@
 from django.utils import timezone
 from . import jalali
+
+
 def persian_number_converter(num):
     numbers = {
         "0" : "۰",
@@ -16,6 +18,8 @@ def persian_number_converter(num):
     for en, fa in numbers.items():
         num = num.replace(en,fa)
     return num
+
+
 def jalali_time(time):
     month = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند']
     time = timezone.localtime(time)
@@ -33,5 +37,24 @@ def jalali_time(time):
         list_of_time[0],
         time.hour,
         time.minute,
+    )
+    return persian_number_converter(outer)
+
+
+def jalali_date(time):
+    month = ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند']
+    time = timezone.localtime(time)
+    string_of_time = '{},{},{}'.format(time.year,time.month,time.day)
+    tuple_of_time = jalali.Gregorian(string_of_time).persian_tuple()
+    
+    list_of_time = list(tuple_of_time)
+    for index,value in enumerate(month):
+        if index+1 == list_of_time[1]:
+            list_of_time[1]= value
+            break
+    outer = ' {} {} {}'.format(
+        list_of_time[2],
+        list_of_time[1],
+        list_of_time[0],
     )
     return persian_number_converter(outer)

@@ -26,7 +26,7 @@ def make_draft(modeladmin, request, queryset):
     ) % updated, messages.SUCCESS)
 
 
-# Register your models here.
+
 class AdminInterface(admin.ModelAdmin):
     list_display = ('image_tag', 'title', 'category_to_str', 'jmodified', 'author', 'situation')
     list_filter = ('modified','author','situation',)
@@ -34,9 +34,6 @@ class AdminInterface(admin.ModelAdmin):
     prepopulated_fields = {'slug':('title',)}
     actions = [make_published, make_draft]
 
-    def category_to_str(self, obj):
-        return ",".join([category.title for category in obj.category.active()])
-    category_to_str.short_description = 'دسته‌بندی'
 
 
 @admin.action(description='دسته‌بندی انتخاب شده نمایش داده شود')
@@ -66,5 +63,6 @@ class CategoryInterface(admin.ModelAdmin):
     actions = [make_available, make_unavailable]
 
 
+# Register your models here.
 admin.site.register(Article, AdminInterface)
 admin.site.register(Category, CategoryInterface)
