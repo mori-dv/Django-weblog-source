@@ -5,7 +5,9 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> خانه {% block tab_title %}{% endblock %} </title>
+  <title>
+      {% block tab_title %}{% endblock %} | {{user.get_full_name}}
+  </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -79,7 +81,7 @@
 
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021 <a href="mailto:morimori.ph@gmail.com">Devoloper mori</a>.</strong>
+    <strong>Copyright &copy; 2021 <a href="mailto:morimori.ph@gmail.com">Developer mori</a>.</strong>
     All rights reserved.
   </footer>
 

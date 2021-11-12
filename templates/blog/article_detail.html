@@ -14,7 +14,7 @@
                 <div class="site-heading">
                     <h2>{{ article.title }}</h2>
                     <!-- <span class="subheading">{{ article.subtitle }}</span> -->
-                    <div style="text-align: left; margin-top: 30px;">
+                    <div class="m-t-30 text-left">
                         <time>
                             {{article.jmodified}}
                         </time>
@@ -27,16 +27,15 @@
 
 <!-- Post Content-->
 <article class="mb-4">
-    <div class="container px-4 px-lg-5" style="text-align: justify;">
+    <div class="container px-4 px-lg-5 text-justify">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                <p>{{article.describtion|linebreaks}}</p>
-                    
+                <p>{{article.describtion|safe}}</p>
                     نوشته شده توسط :
-                    <a href="#">{{article.author}}</a>
-                    <div style="display:inline-block;">
-                        ، {% for category in article.category.active %}
-                            <a href="{% url 'blog:category' category.slug %}">{{category}}</a>  
+                    <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
+                    <div class="dis-inline-block">
+                        {% for category in article.category.active %}
+                            ,<a href="{% url 'blog:category' category.slug %}">#{{category}}</a>
                         {% endfor %}
                     </div>
                 </p>

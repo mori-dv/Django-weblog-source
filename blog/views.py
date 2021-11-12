@@ -1,7 +1,6 @@
-from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.models import User
-from django.shortcuts import render, get_object_or_404
+from account.models import User
+from django.shortcuts import get_object_or_404
 from .models import Article, Category
 # Create your views here.
 
@@ -12,12 +11,12 @@ class ArticleListView(ListView):
     queryset = Article.objects.published()
     paginate_by = 3
 
+
 # each article's page
 class ArticleDetailView(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
         return get_object_or_404(Article.objects.published(), slug=slug)
-    
     
 
 # each category's page
@@ -31,7 +30,6 @@ class ArticleDetailView(DetailView):
 #         'articles': pages
 #     }
 #     return render(request, 'blog/category_list.html', context)
-
 
 class CategoryList(ListView):
     paginate_by = 2

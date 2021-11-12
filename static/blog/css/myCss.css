@@ -23,8 +23,9 @@ html * {
 }
 
 .nav {
-  font-family: sansarif;
+  font-family: 'Vazir', Arial, sans-serif !important;
 }
+
 .li {
   color: #000;
   display: block;

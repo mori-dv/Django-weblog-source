@@ -1,9 +1,10 @@
 from django.db import models
-from django.db.models.deletion import SET_NULL
+from django.urls import reverse
 from django.utils.html import format_html
 from django.utils import timezone
-from .extentions.utils import jalali_date, jalali_time
-from django.contrib.auth.models import User
+from .extensions.utils import jalali_date, jalali_time
+from account.models import User
+
 
 # my managers
 class ArticleManager(models.Manager):
@@ -47,7 +48,7 @@ class Article(models.Model):
         ('d', 'پیش‌نویس'),
         ('p', 'منتشرشده'),
     )
-    title = models.CharField(max_length=100, verbose_name='سرتیتر')
+    title = models.CharField(max_length=100, verbose_name='عنوان')
     category = models.ManyToManyField(Category, verbose_name='دسته‌بندی', related_name='article')
     imgage = models.ImageField('تصویر')
     subtitle = models.TextField(verbose_name="چکیده مطلب")
@@ -56,7 +57,7 @@ class Article(models.Model):
     modified = models.DateTimeField(default=timezone.now, verbose_name="زمان انتشار")
     created = models.DateTimeField(auto_now_add=True, verbose_name="زمان تولید")
     update = models.DateTimeField(auto_now=True, verbose_name="زمان ویرایش")
-    author = models.ForeignKey(User, null=True, on_delete=SET_NULL, related_name='articles', verbose_name='نویسنده')
+    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='articles', verbose_name='نویسنده')
     situation = models.CharField(max_length=1, choices=CHOICES, verbose_name="وضعیت پست")
     
     class Meta:
@@ -64,7 +65,10 @@ class Article(models.Model):
         verbose_name_plural = 'مقالات'
         ordering = ['title', 'situation']
 
-    def jmodified(self): # show persian date and time
+    def get_absolute_url(self):
+        return reverse('account:home')
+
+    def jmodified(self):  # show persian date and time
         return jalali_time(self.modified)
     jmodified.short_description = "زمان انتشار"
 

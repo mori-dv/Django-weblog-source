@@ -1,5 +1,9 @@
 from django.urls import path
 from .views import ArticleListView, CategoryList, ArticleDetailView, AuthorList
+from django.contrib import admin
+admin.site.site_header = 'وبلاگ من'
+admin.site.site_title = 'وبلاگ من'
+
 app_name = 'blog'
 urlpatterns = [
     path('', ArticleListView.as_view(), name='home'),

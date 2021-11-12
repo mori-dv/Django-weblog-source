@@ -1,6 +1,8 @@
 {% extends 'registration/base.html' %}
 
-{% block tab_title %} | {{user.get_full_name}}{% endblock %}
+{% block tab_title %}
+    خانه
+{% endblock %}
 
 {% block title %}
     لیست مقالات
@@ -20,6 +22,7 @@
                     <th>دسته‌بندی</th>
                     <th>نویسنده</th>
                     <th>وضعیت‌پست</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,7 +30,7 @@
                         <tr>
                             <td>{{article.image_tag}}</td>
                             <td>{{article.title}}</td>
-                            <td>{{article.jdate}}</td>
+                            <td>{{article.jmodified}}</td>
                             <td>{{article.category_to_str}}</td>
                             <td>{{article.author.get_full_name}}</td>
                             <td>
@@ -38,6 +41,13 @@
                                     </span>
                                 {% else %}
                                     <span class="badge badge-danger">پیش‌نویس</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if article.situation == 'd' or request.user.is_superuser %}
+                                <span class="btn btn-info">
+                                    <a href="{% url 'account:article_update' article.pk %}" class="text-white text-decoration-none">ویرایش</a>
+                                </span>
                                 {% endif %}
                             </td>
                         </tr>

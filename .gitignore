@@ -12,6 +12,7 @@ db.sqlite3
 db.sqlite3-journal
 .DS_Store
 .idea
+media/
 
 # Created by https://www.toptal.com/developers/gitignore/api/django
 # Edit at https://www.toptal.com/developers/gitignore?templates=django

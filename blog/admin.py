@@ -1,5 +1,6 @@
 from django.contrib import admin, messages
 from .models import Article, Category
+from account import models
 from django.utils.translation import ngettext
 
 # admin actions
@@ -26,16 +27,6 @@ def make_draft(modeladmin, request, queryset):
     ) % updated, messages.SUCCESS)
 
 
-
-class AdminInterface(admin.ModelAdmin):
-    list_display = ('image_tag', 'title', 'category_to_str', 'jmodified', 'author', 'situation')
-    list_filter = ('modified','author','situation',)
-    search_fields = ('title','discribtion')
-    prepopulated_fields = {'slug':('title',)}
-    actions = [make_published, make_draft]
-
-
-
 @admin.action(description='دسته‌بندی انتخاب شده نمایش داده شود')
 def make_available(modeladmin, request, queryset):
     updated = queryset.update(situation=True)
@@ -54,6 +45,14 @@ def make_unavailable(modeladmin, request, queryset):
         ' %d دسته‌بندی از دسترس خارج شدند ',
         updated
     ) % updated, messages.SUCCESS)
+
+
+class AdminInterface(admin.ModelAdmin):
+    list_display = ('image_tag', 'title', 'category_to_str', 'jmodified', 'author', 'situation')
+    list_filter = ('modified', 'author', 'situation')
+    search_fields = ('title', 'discribtion')
+    prepopulated_fields = {'slug': ('title',)}
+    actions = [make_published, make_draft]
 
 
 class CategoryInterface(admin.ModelAdmin):

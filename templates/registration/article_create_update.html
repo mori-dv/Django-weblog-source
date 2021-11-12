@@ -1,0 +1,65 @@
+{% extends 'registration/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block tab_title %}
+    ایجاد مقاله
+{% endblock %}
+
+{% block title %}
+    ایجاد مقاله جدید
+{% endblock %}
+
+{% block main %}
+    <div class="row w-100">
+        <div class="col-md-12">
+        <!-- general form elements -->
+            <div class="card card-primary mr-3">
+                <div class="card-header">
+                    <h3 class="card-title float-left">افزودن مقاله</h3>
+                </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+                <form method="post" role="form" enctype="multipart/form-data"> {% csrf_token %}
+                    <div class="card-body">
+                        <div class = "form-row">
+                            <div class="form-group col-md-6 mb-0">
+                                {{ form.title|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-0">
+                                {{ form.slug|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6 mb-0">
+                                {{ form.category|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-6 mb-0">
+                                {{ form.imgage|as_crispy_field }}
+                                {{ form.modified|as_crispy_field }}
+                            </div>
+                        </div>
+                         <div class = "form-row">
+                            <div class="form-group col-md-12 mb-0">
+                                {{ form.subtitle|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-12 mb-0">
+                                {{ form.describtion|as_crispy_field }}
+                            </div>
+                        </div>
+                        {% if request.user.is_superuser %}
+                            <div class="form-row">
+                                <div class="form-group col-md-6 mb-0">
+                                    {{ form.situation|as_crispy_field }}
+                                </div>
+                                <div class="form-group col-md-6 mb-0">
+                                    {{ form.author|as_crispy_field }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    <button type="submit" class="btn btn-success">ارسال مقاله</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

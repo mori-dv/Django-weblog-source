@@ -41,7 +41,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{% url 'account:article_create' %}" class="nav-link">
                   <i class="far fa-edit nav-icon"></i>
                   <p>افزودن مقاله</p>
                 </a>
@@ -50,14 +50,20 @@
           </li>
           <li class="nav-item">
             <a href="" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fa fa-th"></i>
               <p>
                 پروفایل
                 <span class="right badge badge-danger">جدید</span>
               </p>
             </a>
           </li>
-          
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'account:logout' %}">
+                  <p class="text-black">
+                      خروج از حساب
+                  </p>
+              </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
