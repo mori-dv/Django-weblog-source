@@ -1,3 +1,4 @@
+
 <div class="collapse navbar-collapse navbar" id="navbarResponsive" role="navigation">
     <ul class="navbar-nav ms-auto py-4 py-lg-0 unorder-list">
         <li class="nav-item li">
@@ -10,10 +11,13 @@
                         {{category.title}}
                     </a>
                     {% if category.children.active %}
-                        {% include 'blog/parentials/category_nav_loop.html' %}
+                        {% include 'blog/partials/category_nav_loop.html' %}
                     {% endif %}
                 </li>
             {% endif %}
         {% endfor %}
+            <li class="nav-item li">
+                <a class="nav-link px-lg-3 py-3 py-lg-4 a" href="{% url 'account:login' %}">ورود</a>
+            </li>
     </ul>
 </div>

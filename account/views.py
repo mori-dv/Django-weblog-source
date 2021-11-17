@@ -1,7 +1,18 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .mixins import FieldMixin, FormValidMixin, AuthorAccessMixin
-from django.views.generic import ListView, CreateView, UpdateView
+from .mixins import (
+    FieldMixin,
+    FormValidMixin,
+    AuthorAccessMixin,
+    SuperUserAccessMixin
+)
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+)
 from blog.models import Article
+from django.contrib.auth import logout
 
 
 # Create your views here.
@@ -23,4 +34,11 @@ class ArticleCreate(LoginRequiredMixin, FieldMixin, FormValidMixin, CreateView):
 class ArticleUpdate(AuthorAccessMixin, FieldMixin, FormValidMixin, UpdateView):
     model = Article
     template_name = 'registration/article_create_update.html'
+
+
+class ArticleDelete(SuperUserAccessMixin, DeleteView):
+    model = Article
+    success_url = 'account:home'
+    template_name = 'registration/article_delete.html'
+
 

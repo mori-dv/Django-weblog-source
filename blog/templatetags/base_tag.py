@@ -8,8 +8,18 @@ def title():
     return "وبلاگ من"
 
 
-@register.inclusion_tag('blog/parentials/category_navbar.html')
+@register.inclusion_tag('blog/partials/category_navbar.html')
 def category_navbar():
     return {
         'category': Category.objects.all().filter(situation=True)
+    }
+
+
+@register.inclusion_tag('registration/paretials/link.html')
+def active_link(request, link_name, content):
+    return {
+        'request': request,
+        'link_name': link_name,
+        'link': 'account:{}'.format(link_name),
+        'content': content
     }

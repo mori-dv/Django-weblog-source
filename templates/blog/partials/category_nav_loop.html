@@ -3,7 +3,7 @@
         <li class="nav-item dropdown li">
             <a class="nav-link px-lg-3 py-3 py-lg-4 a" href="{% url 'blog:category' category.slug %}">{{category.title}}</a>
             {% if category.children.active %}
-                {% include 'blog/parentials/category_nav_loop.html' %}
+                {% include 'blog/partials/category_nav_loop.html' %}
             {% endif %}
         </li>
     {% endfor %}

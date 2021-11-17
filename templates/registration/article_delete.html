@@ -1,0 +1,38 @@
+{% extends 'registration/base.html' %}
+
+{% block title %}{% block tab_title %}
+    حذف مقاله
+{% endblock %}{% endblock %}
+
+{% block main %}
+    <div class="row my-5">
+        <div class="col-md-9 mx-auto">
+        <!-- general form elements -->
+            <div class="card card-primary mr-3">
+                <div class="card-header">
+                    <h3 class="card-title float-left py-1">حذف مقاله</h3>
+                    <a href="{% url 'account:home' %}" class="float-right mt-1" title="بازگشت">
+                        <ion-icon name="arrow-back" style="font-size: 25px;"></ion-icon>
+                    </a>
+
+                </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+                <form method="post" role="form"> {% csrf_token %}
+                    <div class="card-body py-lg-5">
+                        <span class="py-4">
+                            آیا از حذف
+                            <i class="text-bold">{{ object }}</i>
+                            نوشته شده توسط
+                            <i class="text-bold">{{ object.author.get_full_name }}</i>
+                             مطمعن هستید؟
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-center my-3">
+                        <button type="submit" class="btn btn-danger" style="font-size: 20px">حذف</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

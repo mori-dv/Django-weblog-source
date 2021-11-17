@@ -45,8 +45,10 @@ class Category(models.Model):
 
 class Article(models.Model):
     CHOICES = (
-        ('d', 'پیش‌نویس'),
-        ('p', 'منتشرشده'),
+        ('d', 'پیش‌نویس'),          # draft
+        ('p', 'منتشرشده'),         # publish
+        ('i', 'درحال‌بررسی'),       # investigation
+        ('b', 'برگشت‌داده‌شده'),     # back
     )
     title = models.CharField(max_length=100, verbose_name='عنوان')
     category = models.ManyToManyField(Category, verbose_name='دسته‌بندی', related_name='article')

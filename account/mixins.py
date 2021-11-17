@@ -36,8 +36,15 @@ class FormValidMixin:
 class AuthorAccessMixin:
     def dispatch(self, request, pk, *args, **kwargs):
         article = get_object_or_404(Article, pk=pk)
-        if article.author == request.user and article.situation == 'd' or request.user.is_superuser:
+        if article.author == request.user and article.situation in ['b', 'd'] or request.user.is_superuser:
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404
 
+
+class SuperUserAccessMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            raise Http404

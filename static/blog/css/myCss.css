@@ -26,7 +26,8 @@ html * {
   font-family: 'Vazir', Arial, sans-serif !important;
 }
 
-.li {
+.li,
+.acc-link {
   color: #000;
   display: block;
   float: left;
@@ -37,11 +38,11 @@ html * {
 }
 
 .li .a {
-  color: #000;
+  color: #FFFFFF;
 }
 
 .li:hover {
-  background: rgba(255, 0, 0, 0.39);
+  background: rgba(56, 211, 136, 0.52);
   cursor: pointer;
 }
 
