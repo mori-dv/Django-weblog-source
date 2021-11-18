@@ -30,12 +30,25 @@
     <div class="container px-4 px-lg-5 text-justify">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
+            {% if object.is_special %}
+                {% if user.is_authenticated and user.is_vip_user or user == object.author or user.is_superuser %}
+                    <p>{{article.describtion|safe}}</p>
+                {% else %}
+                    <h5>
+                        این مقاله ویژه می باشد و برای دیدن باید
+                        <a href="#" class="link-primary">اشتراک ویژه</a>
+                        تهیه نمایید.
+                    </h5>
+                {% endif %}
+            {% else %}
                 <p>{{article.describtion|safe}}</p>
+            {% endif %}
+
                     نوشته شده توسط :
-                    <a href="{% url 'blog:author' article.author %}">{{article.author.get_full_name}}</a>
+                    <a href="{% url 'blog:author' article.author %}" class="h6">{{article.author.get_full_name}}</a>
                     <div class="dis-inline-block">
                         {% for category in article.category.active %}
-                            ,<a href="{% url 'blog:category' category.slug %}">#{{category}}</a>
+                             <a href="{% url 'blog:category' category.slug %}" class="h6 link-secondary">#{{category}}</a>
                         {% endfor %}
                     </div>
                 </p>

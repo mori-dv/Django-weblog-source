@@ -24,6 +24,7 @@
                     <th>دسته‌بندی</th>
                     <th>نویسنده</th>
                     <th>وضعیت‌پست</th>
+                    <th>مقاله‌ویژه</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -70,6 +71,13 @@
                                     </span>
                                 {% endif %}
 
+                            </td>
+                            <td>
+                                {% if article.is_special %}
+                                    <ion-icon name="checkmark-circle" style="color: green;"></ion-icon>
+                                {% else %}
+                                    <ion-icon name="remove-circle" style="color: red;"></ion-icon>
+                                {% endif %}
                             </td>
                             <td>
                                 <div class="btn-group btn-group-sm">

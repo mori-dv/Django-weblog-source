@@ -7,14 +7,25 @@ class FieldMixin:
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
             self.fields = [
-                "title", "category", "author",
-                "imgage", "subtitle", "describtion",
-                "slug", "modified", "situation"
+                "title",
+                "category",
+                "author",
+                "imgage",
+                "subtitle",
+                "describtion",
+                "slug",
+                "modified",
+                'is_special',
+                "situation"
             ]
         elif request.user.is_author:
             self.fields = [
-                "title", "category", "imgage",
-                "subtitle", "describtion", "slug",
+                "title",
+                "category",
+                "imgage",
+                "subtitle",
+                "describtion",
+                "slug",
                 "modified"
             ]
         else:

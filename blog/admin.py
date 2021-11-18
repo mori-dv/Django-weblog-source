@@ -48,8 +48,8 @@ def make_unavailable(modeladmin, request, queryset):
 
 
 class AdminInterface(admin.ModelAdmin):
-    list_display = ('image_tag', 'title', 'category_to_str', 'jmodified', 'author', 'situation')
-    list_filter = ('modified', 'author', 'situation')
+    list_display = ('image_tag', 'title', 'category_to_str', 'jmodified', 'author', 'is_special', 'situation')
+    list_filter = ('modified', 'author', 'situation', 'is_special')
     search_fields = ('title', 'discribtion')
     prepopulated_fields = {'slug': ('title',)}
     actions = [make_published, make_draft]

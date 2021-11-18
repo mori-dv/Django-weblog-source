@@ -59,9 +59,16 @@ class Article(models.Model):
     modified = models.DateTimeField(default=timezone.now, verbose_name="زمان انتشار")
     created = models.DateTimeField(auto_now_add=True, verbose_name="زمان تولید")
     update = models.DateTimeField(auto_now=True, verbose_name="زمان ویرایش")
-    author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='articles', verbose_name='نویسنده')
+    author = models.ForeignKey(
+        User,
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='articles',
+        verbose_name='نویسنده'
+    )
     situation = models.CharField(max_length=1, choices=CHOICES, verbose_name="وضعیت پست")
-    
+    is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه')
+
     class Meta:
         verbose_name = "مقاله"
         verbose_name_plural = 'مقالات'
