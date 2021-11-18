@@ -5,6 +5,7 @@ from .mixins import (
     AuthorAccessMixin,
     SuperUserAccessMixin
 )
+from .models import User
 from django.views.generic import (
     ListView,
     CreateView,
@@ -42,3 +43,18 @@ class ArticleDelete(SuperUserAccessMixin, DeleteView):
     template_name = 'registration/article_delete.html'
 
 
+class ProfileView(UpdateView):
+    model = User
+    template_name = 'registration/profile.html'
+    fields = [
+        'username',
+        'email',
+        'first_name',
+        'last_name',
+        'vip_user',
+        'is_author'
+    ]
+    success_url = 'account:profile'
+
+    def get_object(self):
+        return User.objects.get(pk=self.request.user.pk)

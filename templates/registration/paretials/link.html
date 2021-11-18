@@ -1,9 +1,6 @@
-<a href="{% url link %}"
-   class="nav-link
-    {% if request.resolver_match.url_name == link_name %}
-        active
-    {% endif %}">
 
+
+<a href="{% url link %}" class="nav-link {% if request.resolver_match.url_name == link_name %}active{% endif %}">
     <ion-icon name="{{ classes }}" class="icon-size"></ion-icon>
     <p>{{ content }}</p>
 </a>
