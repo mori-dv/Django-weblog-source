@@ -16,10 +16,11 @@ def category_navbar():
 
 
 @register.inclusion_tag('registration/paretials/link.html')
-def active_link(request, link_name, content):
+def active_link(request, link_name, content, classes):
     return {
         'request': request,
         'link_name': link_name,
         'link': 'account:{}'.format(link_name),
-        'content': content
+        'content': content,
+        'classes': classes
     }

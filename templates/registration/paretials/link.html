@@ -3,6 +3,7 @@
     {% if request.resolver_match.url_name == link_name %}
         active
     {% endif %}">
-    <ion-icon name="list-outline" class="icon-size"></ion-icon>
+
+    <ion-icon name="{{ classes }}" class="icon-size"></ion-icon>
     <p>{{ content }}</p>
 </a>
