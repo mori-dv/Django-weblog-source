@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from .mixins import (
     FieldMixin,
     FormValidMixin,
@@ -13,7 +14,6 @@ from django.views.generic import (
     DeleteView,
 )
 from blog.models import Article
-from django.contrib.auth import logout
 
 
 # Create your views here.
@@ -39,7 +39,7 @@ class ArticleUpdate(AuthorAccessMixin, FieldMixin, FormValidMixin, UpdateView):
 
 class ArticleDelete(SuperUserAccessMixin, DeleteView):
     model = Article
-    success_url = 'account:home'
+    success_url = reverse_lazy('account:home')
     template_name = 'registration/article_delete.html'
 
 
@@ -54,7 +54,7 @@ class ProfileView(UpdateView):
         'vip_user',
         'is_author'
     ]
-    success_url = 'account:profile'
+    success_url = reverse_lazy('account:profile')
 
     def get_object(self):
         return User.objects.get(pk=self.request.user.pk)
