@@ -2,7 +2,7 @@
 *{
     direction: rtl !important;
     text-align: right !important;
-    font-family: 'Vazir', Arial, sans-serif !important;
+    font-family: 'Vazir', Arial, sans-serif ;
 }
 .layout-fixed .main-sidebar {
     right: 0;

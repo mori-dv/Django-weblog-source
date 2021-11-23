@@ -23,12 +23,14 @@
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-n="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <!-- with ion-icons -->
-          <li class="nav-item has-treeview menu-open">
+            {% if user.is_superuser or user.is_author %}
+                <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
                 <ion-icon name="albums-outline" class="icon-size"></ion-icon>
                 <p>
@@ -45,18 +47,13 @@
                 </li>
             </ul>
           </li>
+            {% endif %}
           <li class="nav-item">
-            <a href="{% url 'account:profile' %}"
-               class="nav-link {% if request.resolver_match.url_name == 'profile' %}active {% endif %}">
-                <ion-icon name="person-outline" class="icon-size"></ion-icon>
-                <p>
-                پروفایل
-                <span class="right badge badge-danger">جدید</span>
-              </p>
-            </a>
+            {% active_link request 'profile' 'پروفایل' 'apps-sharp' %}
           </li>
         </ul>
       </nav>
+
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->

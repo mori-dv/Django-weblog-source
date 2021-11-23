@@ -2,133 +2,104 @@
 {% load widget_tweaks %}
 
 <!DOCTYPE html>
-<html lang="fa-IR">
+<html>
 <head>
-	<title>
-        {% block title %} login{% endblock %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>
+      {% block tab_title %}
+          ورود
+      {% endblock %}
     </title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="{% static 'registration/login/images/icons/favicon.ico' %}>
-<!--===============================================================================================-->
-	<link rel='stylesheet' type='text/css' href='{% static 'registration/login/vendor/bootstrap/css/bootstrap.min.css' %}'>
-<!--===============================================================================================-->
-	<link rel='stylesheet' type='text/css' href="{% static 'registration/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'registration/login/fonts/iconic/css/material-design-iconic-font.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'registration/login/vendor/animate/animate.css' %}">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{% static 'registration/login/vendor/css-hamburgers/hamburgers.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'registration/login/vendor/animsition/css/animsition.min.css' %}">
-<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="{% static 'registration/login/vendor/select2/select2.min.css' %}">
-<!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="{% static 'registration/login/vendor/daterangepicker/daterangepicker.css' %}">
-<!--===============================================================================================-->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
-    <link rel="stylesheet" type="text/css" href="{% static 'registration/login/css/util.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'registration/login/css/main.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'registration/login/css/rtl.css' %}">
-<!--===============================================================================================-->
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/adminlte.min.css' %}">
+    <!-- custom css for rtl -->
+    <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/custom.css' %}">
+    <style>
+        input:focus::placeholder {
+            color: transparent;
+        }
+    </style>
 </head>
-<body>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('{% static "registration/login/images/bg-01.jpg" %}')">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="post">
-					<span class="login100-form-logo">{% csrf_token %}
-						<i class="zmdi zmdi-landscape"></i>
-					</span>
-					<span class="login100-form-title p-b-34 p-t-27">
-						ورود
-					</span>
-					{% if form.non_field_errors %}
-						<div class="error">
-							{% for error in form.non_field_errors %}
-								<i class="fa fa-exclamation"></i>
-								<span>
-									{{error}}
-								</span>
-							{% endfor %}
-						</div>
-					{% endif %}
-					<div class="wrap-input100 validate-input" data-validate = "نام کاربری را وارد کنید">
-						{% render_field form.username class="input100" placeholder='نام کاربری' %}
-						<span class="focus-input100" data-placeholder="&#xf3a0;"></span>
-					</div>	
-					{% if  form.username.errors %}
-						<div class="error">
-							{% for error in form.username.errors %}
-								<i class="fa fa-exclamation"></i>
-								<span>
-									{{error}}
-								</span>
-							{% endfor %}
-						</div>
-					{% endif %}
+<body class="hold-transition login-page">
+    <span style="background-color: rgba(248,95,114,0.6); color: darkred;">
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <strong>{{ error }}</strong>
+            {% endfor %}
+        {% endif %}
+    </span>
+<div class="login-box">
 
-					<div class="wrap-input100 validate-input" data-validate="رمز ورود را وارد کنید">
-						{% render_field form.password class="input100" placeholder='رمز ورود' %}
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
-						{% if form.password.errors %}
-							<div class="error">
-								{% for error in form.password.errors %}
-									<i class="fa fa-exclamation"></i>
-									<span>
-										{{error}}
-									</span>
-								{% endfor %}
-							</div>
-						{% endif %}
+  <div class="login-logo">
+    <span>ورود</span>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body my-5">
+      <form method="post"> {% csrf_token %}
+        <div class="input-group mb-3">
+            {% render_field form.username type="text" class="form-control" placeholder="نام کاربری" %}
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                </div>
+            </div>
+        </div>
+        <div class="input-group mb-3">
+            {% render_field form.password type="password" class="form-control" placeholder='رمز عبور' %}
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                مرا به خاطر بسپار
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-6 dis-inline-block mx-auto my-2">
+            <button type="submit"
+                    class="btn btn-pill btn-primary btn-block bg-gradient-primary text-center">
+                ورود
+            </button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
 
-					<div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						<label class="label-checkbox100" for="ckb1">
-							مرا به خاطر بسپار
-						</label>
-					</div>
+      <p class="my-3">
+        <a href="{% url 'password_change' %}">فراموشی رمز عبور</a>
+      </p>
+      <span class="mb-0 d-block text-center">
+        <a href="" class="text-decoration-none mx-auto" style="color: #5e37a6;">ثبت کاربر جدید</a>
+      </span>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->
 
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" type="submit">
-							ورود
-						</button>
-					</div>
-					<!-- reset password link -->
-					<!-- <div class="text-center p-t-90">
-						<a class="txt1" href="#">
-							فراموشی رمز ورود؟
-						</a>
-					</div> -->
-				</form>
-			</div>
-		</div>
-	</div>
-	
-
-	<div id="dropDownSelect1"></div>
-	
-<!--===============================================================================================-->
-	<script src="{% static 'registration/login/vendor/jquery/jquery-3.2.1.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'registration/login/vendor/animsition/js/animsition.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'registration/login/vendor/bootstrap/js/popper.js' %}"></script>
-	<script src="{% static 'registration/login/vendor/bootstrap/js/bootstrap.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'registration/login/vendor/select2/select2.min.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'registration/login/vendor/daterangepicker/moment.min.js' %}"></script>
-	<script src="{% static 'registration/login/vendor/daterangepicker/daterangepicker.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'registration/login/vendor/countdowntime/countdowntime.js' %}"></script>
-<!--===============================================================================================-->
-	<script src="{% static 'registration/login/js/main.js' %}"></script>
+<!-- jQuery -->
+<script src="{% static 'registration/adminlte/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'registration/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 </body>
 </html>
