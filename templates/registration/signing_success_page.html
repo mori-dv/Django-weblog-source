@@ -1,0 +1,48 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/adminlte.min.css' %}">
+    <!-- custom css for rtl -->
+    <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/custom.css' %}">
+    <title>
+      {% block tab_title %}
+          حساب کاربری فعال شد
+      {% endblock %}
+    </title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/adminlte.min.css' %}">
+    <!-- custom css for rtl -->
+    <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/custom.css' %}">
+
+</head>
+<body class="hold-transition login-page">
+    <div class="my-5 mx-auto" dir="rtl">
+        <h2 class="text-danger text-center">
+            حساب کاربری شما با موفقیت ساخته شد.
+        </h2>
+        <p class="text-center">
+            لطفا برای فعال سازی حساب ایمیل خود را چک کنید.
+        </p>
+        <div class="text-center">
+            <a href="{% url 'login' %}" class="text-bold">ورود</a>
+        </div>
+    </div>
+
+<!-- jQuery -->
+<script src="{% static 'registration/adminlte/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'registration/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>

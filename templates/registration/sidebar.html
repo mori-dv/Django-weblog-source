@@ -18,7 +18,13 @@
                class="img-circle elevation-2" alt="تصویر {{ user.get_full_name }}">
         </div>
         <div class="info">
-          <a href="" class="d-block">{{user.get_full_name}}</a>
+          <a href="" class="d-block">
+              {% if user.get_full_name %}
+                {{user.get_full_name}}
+              {% else %}
+                {{ user.username }}
+              {% endif %}
+          </a>
         </div>
       </div>
 
@@ -51,6 +57,14 @@
           <li class="nav-item">
             {% active_link request 'profile' 'پروفایل' 'apps-sharp' %}
           </li>
+        {% if user.is_superuser %}
+            <li>
+                <a href="" class="nav-link bg-maroon">
+                    <ion-icon name="people" class="icon-size"></ion-icon>
+                    <p>کاربران</p>
+                </a>
+            </li>
+        {% endif %}
         </ul>
       </nav>
 

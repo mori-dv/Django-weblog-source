@@ -4,6 +4,7 @@ from django.db import models
 
 
 class User(AbstractUser):
+    email = models.EmailField(unique=True, verbose_name='ایمیل')
     is_author = models.BooleanField(default=False, verbose_name='وضعیت‌ نویسندگی')
     vip_user = models.DateTimeField(default=timezone.now, verbose_name="مدت زمان کاربر ویژه")
 

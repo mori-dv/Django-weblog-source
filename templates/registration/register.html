@@ -1,0 +1,120 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ثبت نام</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/adminlte.min.css' %}">
+    <!-- custom rtl css -->
+    <link rel="stylesheet" href="{% static 'registration/adminlte/dist/css/custom.css' %}">
+    <style>
+        input:focus::placeholder {
+            color: transparent;
+        }
+    </style>
+</head>
+    <body class="hold-transition register-page">
+        <div class="register-box">
+            <div class="register-logo">
+                <h2 class="text-center">ثبت نام</h2>
+            </div>
+
+            <div class="card">
+                <div class="card-body register-card-body">
+                    <form method="post" class="mt-4 validate-form"> {% csrf_token %}
+                        <div class="input-group mb-3">
+                            {% render_field form.username type="text" class="form-control" placeholder="نام کاربری" %}
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                  <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            {% render_field form.email type="email" class="form-control" placeholder="ایمیل" %}
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                  <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                            {% if form.email.errors %}
+                                <div dir="rtl">
+                                    {{ form.email.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="input-group mb-3">
+                            {% render_field form.password1 type="password" class="form-control" placeholder="رمز عبور" %}
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            {% if form.password1.errors %}
+                                <div>
+                                    {{ form.password1.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="input-group mb-3">
+                            {% render_field form.password2 type="password" class="form-control" placeholder="تایید رمز عبور" %}
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                            {% if form.password2.errors %}
+                                <div>
+                                    {{ form.password2.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row mt-4">
+                          <div class="col-6 mx-auto">
+                              <button type="submit"
+                                      class="btn btn-primary btn-block dis-inline-block bg-gradient text-center">ثبت نام</button>
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                    </form>
+
+                    <div class="social-auth-links text-center">
+                        <p class="text-center my-4">- یا -</p>
+                        <div class="col-8 mx-auto">
+                            <a href="#" class="btn btn-block btn-danger my-3">
+                                <i class="fab fa-google mr-2"></i>
+                                    ورود با حساب گوگل
+                            </a>
+                        </div>
+                    </div>
+                    <div class="mx-auto text-center my-4">
+                        <a href="{% url 'login' %}" class="text-center">قبلا حساب کاربری داشته ام</a>
+                    </div>
+
+                </div>
+                <!-- /.form-box -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.register-box -->
+
+        <!-- jQuery -->
+        <script src="{% static 'registration/adminlte/plugins/jquery/jquery.min.js' %}"></script>
+        <!-- Bootstrap 4 -->
+        <script src="{% static 'registration/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    </body>
+</html>
+

@@ -1,11 +1,12 @@
 from django.contrib.auth import views
+from django.conf.urls import url
 from django.urls import path
 from .views import (
     ArticleList,
     ArticleCreate,
     ArticleUpdate,
     ArticleDelete,
-    ProfileView
+    ProfileView,
 )
 
 app_name = 'account'
