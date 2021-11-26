@@ -1,5 +1,6 @@
 asgiref==3.4.1
 Django==3.2.8
+django-comments-dab==2.7.1
 django-cors-headers==3.10.0
 django-crispy-forms==1.13.0
 django-gravatar2==1.4.4

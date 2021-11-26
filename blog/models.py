@@ -4,6 +4,8 @@ from django.utils.html import format_html
 from django.utils import timezone
 from .extensions.utils import jalali_date, jalali_time
 from account.models import User
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 
 # my managers
@@ -68,6 +70,7 @@ class Article(models.Model):
     )
     situation = models.CharField(max_length=1, choices=CHOICES, verbose_name="وضعیت پست")
     is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه')
+    comments = GenericRelation(Comment)
 
     class Meta:
         verbose_name = "مقاله"

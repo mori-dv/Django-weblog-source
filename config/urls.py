@@ -26,6 +26,7 @@ urlpatterns = [
     path('activate/<uidb64>/<token>', activate, name='activate'),
     path('', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
+    path('comment/', include('comment.urls')),
     path('account/', include('account.urls'))
 
 ]
