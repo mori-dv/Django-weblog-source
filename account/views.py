@@ -127,3 +127,15 @@ def activate(request, uidb64, token):
         )
 
 
+class UserList(SuperUserAccessMixin, ListView):
+    model = User
+    template_name = 'registration/user_table.html'
+    context_object_name = 'user'
+
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return User.objects.values()
+
+    def get_object(self):
+        return User.objects.get(pk=self.request.user.pk)
+

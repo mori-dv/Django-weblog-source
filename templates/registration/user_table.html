@@ -1,0 +1,188 @@
+{% load static %}
+{% load base_tag %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>
+          کاربران
+        </title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/fontawesome-free/css/all.min.css' %}">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <!-- Tempusdominus Bbootstrap 4 -->
+        <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+        <!-- iCheck -->
+        <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+        <!-- JQVMap -->
+        <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/jqvmap/jqvmap.min.css' %}">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="{% static 'registration/adminlte/assets/css/adminlte.min.css' %}">
+        <!-- overlayScrollbars -->
+        <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+        <!-- Daterange picker -->
+        <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/daterangepicker/daterangepicker.css' %}">
+        <!-- summernote -->
+        <link rel="stylesheet" href="{% static 'registration/adminlte/plugins/summernote/summernote-bs4.css' %}">
+        <!-- Google Font: Source Sans Pro -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <!-- Bootstrap 4 RTL -->
+        <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
+        <!-- Custom style for RTL -->
+        <link rel="stylesheet" href="{% static 'registration/adminlte/assets/css/custom.css' %}">
+    </head>
+    <body>
+    <nav class=" navbar navbar-expand navbar-light bg-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+              <li class="nav-item">
+              </li>
+              <li class="nav-item d-none d-sm-inline-block h5">
+                <a href="{% url 'account:home' %} " class="nav-link">صفحه اصلی</a>
+              </li>
+              <li class="nav-item d-none d-sm-inline-block h5">
+                <a href="{% url 'blog:home' %} " target="_blank" class="nav-link">نمایش سایت</a>
+              </li>
+            </ul>
+              <ul class="navbar-nav mr-auto-navbav">
+                  <li class="nav-item">
+                    <a class="nav-link" title="بازگشت" href="{% url 'account:home' %}">
+                      <i class="fa fa-arrow-left"></i>
+                    </a>
+                  </li>
+              </ul>
+          </nav>
+    <div class="mx-auto">
+        <h3 class="text-center">
+            لیست کاربران
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive ">
+            <table class="table">
+                <thead class="table-active">
+                    <tr>
+                        <th scope="col">نام‌کاربری</th>
+                        <th scope="col">نام</th>
+                        <th scope="col">نام‌خانوادگی</th>
+                        <th scope="col">ایمیل</th>
+                        <th scope="col">زمان‌ثبت نام</th>
+                        <th scope="col">نویسنده</th>
+                        <th scope="col">کارمند</th>
+                        <th scope="col">عضو‌فعال</th>
+                        <th scope="col">عضو‌ویژه</th>
+                        <th scope="col">آخرین‌ورود</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in user %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>
+                                 {% if user.first_name %}
+                                     {{ user.first_name }}
+                                 {% else %}
+                                     <p> - </p>
+                                 {% endif %}
+                            </td>
+                            <td>
+                                 {% if user.last_name %}
+                                     {{ user.last_name }}
+                                 {% else %}
+                                     <p> - </p>
+                                 {% endif %}
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.date_joined }}</td>
+                            <td>
+                                 {% if user.is_author %}
+                                     <i class="fas fa-check-circle" style="color: green"></i>
+                                 {% else %}
+                                     <i class="fas fa-minus-circle" style="color: red;"></i>
+                                 {% endif %}
+                            </td>
+                            <td>
+                                 {% if user.is_staff %}
+                                     <i class="fas fa-check-circle" style="color: green;"></i>
+                                 {% else %}
+                                     <i class="fas fa-minus-circle" style="color: red;"></i>
+                                 {% endif %}
+                            </td>
+                            <td>
+                                 {% if user.is_active %}
+                                     <i class="fas fa-check-circle" style="color: green;"></i>
+                                 {% else %}
+                                     <i class="fas fa-minus-circle" style="color: red;"></i>
+                                 {% endif %}
+                            </td>
+                            <td>
+                                 {% if user.is_vip_user %}
+                                     <i class="fas fa-check-circle" style="color: green;"></i>
+                                 {% else %}
+                                     <i class="fas fa-minus-circle" style="color: red;"></i>
+                                 {% endif %}
+                            </td>
+                            <td>
+                                {% if user.last_login %}
+                                    {{ user.last_login }}
+                                {% else %}
+                                    <p>هیچوقت</p>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+        <!-- jQuery -->
+        <script src="{% static 'registration/adminlte/plugins/jquery/jquery.min.js' %}"></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src="{% static 'registration/adminlte/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- Bootstrap 4 rtl -->
+        <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="{% static 'registration/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <!-- ChartJS -->
+        <script src="{% static 'registration/adminlte/plugins/chart.js/Chart.min.js' %}"></script>
+        <!-- Sparkline -->
+        <script src="{% static 'registration/adminlte/plugins/sparklines/sparkline.js' %}"></script>
+        <!-- JQVMap -->
+        <script src="{% static 'registration/adminlte/plugins/jqvmap/jquery.vmap.min.js' %}"></script>
+        <script src="{% static 'registration/adminlte/plugins/jqvmap/maps/jquery.vmap.world.js' %}"></script>
+        <!-- jQuery Knob Chart -->
+        <script src="{% static 'registration/adminlte/plugins/jquery-knob/jquery.knob.min.js' %}"></script>
+        <!-- daterangepicker -->
+        <script src="{% static 'registration/adminlte/plugins/moment/moment.min.js' %}"></script>
+        <script src="{% static 'registration/adminlte/plugins/daterangepicker/daterangepicker.js' %}"></script>
+        <!-- Tempusdominus Bootstrap 4 -->
+        <script src="{% static 'registration/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+        <!-- Summernote -->
+        <script src="{% static 'registration/adminlte/plugins/summernote/summernote-bs4.min.js' %}"></script>
+        <!-- overlayScrollbars -->
+        <script src="{% static 'registration/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %}"></script>
+        <!-- AdminLTE App -->
+          <script src="{% static 'registration/adminlte/assets/js/adminlte.js' %}"></script>
+        <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+        <script src="{% static 'registration/adminlte/assets/js/pages/dashboard.js' %}"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="{% static 'registration/adminlte/assets/js/demo.js' %}"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule="" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    </body>
+</html>
+
+
+
+
+

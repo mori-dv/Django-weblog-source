@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'blog.extensions',
     'widget_tweaks',
     'crispy_forms',
+    'django_gravatar',
 ]
 
 MIDDLEWARE = [

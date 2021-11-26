@@ -1,5 +1,6 @@
 {% load static %}
 {% load base_tag %}
+{% load gravatar %}
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{% url 'blog:home' %}" class="brand-link">
@@ -14,8 +15,8 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{% static 'registration/adminlte/assets/img/user2-160x160.jpg' %}"
-               class="img-circle elevation-2" alt="تصویر {{ user.get_full_name }}">
+          <img src="{% gravatar_url user.email 150 %}"
+               class="img-circle elevation-2" alt="تصویر {{ user.email }}">
         </div>
         <div class="info">
           <a href="" class="d-block">
@@ -59,7 +60,7 @@
           </li>
         {% if user.is_superuser %}
             <li>
-                <a href="" class="nav-link bg-maroon">
+                <a href="{% url 'account:user_list' %}" class="nav-link bg-maroon">
                     <ion-icon name="people" class="icon-size"></ion-icon>
                     <p>کاربران</p>
                 </a>

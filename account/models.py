@@ -15,3 +15,5 @@ class User(AbstractUser):
             return False
     is_vip_user.short_description = 'عضو ویژه'
     is_vip_user.boolean = True
+
+
