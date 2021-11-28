@@ -13,6 +13,7 @@ db.sqlite3-journal
 .DS_Store
 .idea
 media/
+.vscode
 
 # Created by https://www.toptal.com/developers/gitignore/api/django
 # Edit at https://www.toptal.com/developers/gitignore?templates=django
