@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.sites.shortcuts import get_current_site
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.contrib import messages
-
+from django.core.mail import EmailMessage
 from comment.models import Comment
 from comment.forms import CommentForm
 from comment.utils import get_comment_from_key, get_user_for_request, CommentFailReason
@@ -42,6 +43,65 @@ class CreateComment(CanCreateMixin, CommentCreateMixin):
         )
         self.comment = self.perform_create(temp_comment, self.request)
         self.data = render_to_string(self.get_template_names(), self.get_context_data(), request=self.request)
+
+        # sending email codes for commenting
+        article = self.comment.content_object  # getting article detail for sending email to who commented
+        current_site = get_current_site(self.request)
+        author_email = article.author.email
+        user_email = self.comment.user.email
+        if author_email == user_email:
+            author_email = False
+            user_email = False
+        parent_email = False
+        if self.comment.parent:
+            parent_email = self.comment.parent.user.email
+            if parent_email in [author_email, user_email]:
+                parent_email = False
+
+        # main jobs
+        if author_email:
+            email = EmailMessage(
+                'دیدگاه جدیدی برای شما ثبت شد',
+                'برای مقاله شما با عنوان <<{}>>  دیدگاه جدیدی ثبت شده است. ' \
+                'جهت مشاهده و پاسخ به آن بر روی لینک زیر کلیک نمایید: \n' \
+                '{}{}'.format(article,
+                              current_site,
+                              reverse('blog:article_detail', kwargs={'slug': article.slug})
+                              ),
+                to=[author_email]
+            )
+            email.content_subtype = 'html'
+            email.send()
+
+        if user_email:
+            email = EmailMessage(
+                'شما دیدگاه جدیدی ثبت کرده اید',
+                'شما برای مقاله <<{}>> دیدگاه جدیدی ثبت نموده اید. با تشکر.\n' \
+                'لینک مقاله : \n'
+                '{}{}'.format(article,
+                              current_site,
+                              reverse('blog:article_detail', kwargs={'slug': article.slug})
+                              ),
+                to=[user_email]
+            )
+            email.content_subtype = 'html'
+            email.send()
+
+        if parent_email:
+            email = EmailMessage(
+                'برای دیدگاه شما پاسخی ثبت شد',
+                'برای دیدگاه شما در مقاله <<{}>> پاسخی ثبت شده است.' \
+                'جهت مشاهده به لینک زیر مراجعه کنید : \n' \
+                '{}{}'.format(article,
+                              current_site,
+                              reverse('blog:article_detail', kwargs={'slug': article.slug})
+                              ),
+                to=[parent_email]
+            )
+            email.content_subtype = 'html'
+            email.send()
+        # end main job
+        # end sending massage codes
         return UTF8JsonResponse(self.json())
 
     def form_invalid(self, form):

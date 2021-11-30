@@ -1,24 +1,29 @@
 {% load comment_tags %}
 {% load i18n %}
 
-<div id="{{ comment.urlhash }}" class="js-updated-comment {% if comment.has_flagged_state %}flagged-comment {% endif %}{% block content_wrapper_cls %}{% if has_valid_profile %}col-9 col-md-10{% else %}co-11 mx-3{% endif %}{% endblock content_wrapper_cls %}" >
+<div id="{{ comment.urlhash }}"
+     class="text-right js-updated-comment media-comment-bubble left-top col-6 {% if comment.has_flagged_state %}flagged-comment {% endif %}{% block content_wrapper_cls %}{% if has_valid_profile %} col-md-9 {% else %}co-9 mx-3{% endif %}{% endblock content_wrapper_cls %}" >
     {% block comment_content %}
     {% render_content comment %}
     {% endblock comment_content %}
     {% get_username_for_comment comment as username %}
     <div class="{% block footer_wrapper_cls %}mt-2 text-muted{% endblock footer_wrapper_cls %}">
         <small>
-            {% get_profile_url comment as profile_url %}
+             {% get_profile_url comment as profile_url %}
             <{% if comment.user %}a{% else %}span{% endif %}
                 class="{% block username_cls %}{% endblock username_cls %}" {% if profile_url %}href="{{ profile_url }}"{% endif %}
-                title="{% if comment.user %}{% blocktrans %}view {{ username }} profile{% endblocktrans %}{% else %}{% trans 'comment by anonymous user' %}{% endif %}"
-            >
-                {{ username }}
-            </{% if comment.user %}a{% else %}span{% endif %}> |
-            {% if comment.is_edited %}
-                <span class="font-italic" title="{% trans 'Edited' %}">{% blocktrans with edited_time=comment.edited|timesince %}Edited: {{ edited_time }} ago{% endblocktrans %}</span>
+                title="{% if comment.user %}{% blocktrans %}مشاهده آواتار {{ comment.user.get_full_name }}{% endblocktrans %}{% else %}{% trans 'کاربر ناشناس' %}{% endif %}">
+                {% if comment.user.get_full_name %}
+                    {{ comment.user.get_full_name }}
+                {% else %}
+                    {{ comment.user }}
+                {% endif %}
+             </{% if comment.user %}a{% else %}span{% endif %}>
+            <br>
+             {% if comment.is_edited %}
+                <span class="font-italic" title="{% trans 'ویرایش شده' %}">{% blocktrans with edited_time=comment.edited|timesince %}ویرایش شده در: {{ edited_time }} پیش{% endblocktrans %}</span>
             {% else %}
-                <span class="font-italic" title="{% trans 'Posted' %}">{% blocktrans with posted_time=comment.posted|timesince %}{{ posted_time }} ago{% endblocktrans %}</span>
+                <span class="font-italic" title="{% trans 'ارسال شده' %}">{% blocktrans with posted_time=comment.posted|timesince %}{{ posted_time }} پیش{% endblocktrans %}</span>
             {% endif %}
             {% can_delete_comment comment user as can_delete %}
             {% if comment.user == user %}
@@ -37,10 +42,10 @@
                 {% include 'comment/block/block_icon.html' %}
             {% endif %}
             {% if comment.is_parent %}
-                {% get_replies_count comment user as reply_count %}
-                | <span class="js-reply-number {% block reply_count_cls %}text-dark{% endblock reply_count_cls %}">{{ reply_count }}</span>
-                <a class="js-reply-link {% block reply_link_cls %}btn btn-link ml-1{% endblock reply_link_cls %}" href="#">
-                    {% blocktrans count reply_count=reply_count %} Reply{% plural %} Replies{% endblocktrans %}
+                | {% get_replies_count comment user as reply_count %}
+                 <span class="js-reply-number {% block reply_count_cls %}text-dark{% endblock reply_count_cls %}">{{ reply_count }}</span>
+                 <a class="js-reply-link {% block reply_link_cls %}btn btn-link ml-1{% endblock reply_link_cls %}" href="#">
+                    پاسخ
                 </a>
                 {% if comment.user == user and is_subscription_allowed %}
                     <div class="{% block follow_icon_wrapper_cls %}d-inline ml-3{% endblock follow_icon_wrapper_cls %}">

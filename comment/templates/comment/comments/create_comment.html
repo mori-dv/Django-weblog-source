@@ -17,7 +17,7 @@
             <div id="buttonPlaceholder" class="{% block submit_button_wrapper_cls %}col-sm-3 col-md-2 px-2 m-3 m-sm-0{% endblock submit_button_wrapper_cls %}">
                 <button disabled class="js-comment-btn {% block submit_button_cls %}btn btn-outline-success btn-block btn-sm{% endblock submit_button_cls %}"
                         type="submit" name="form_type" value="{% if comment %}child{% else %}parent{% endif %}" data-email-required="{% if user.is_anonymous and is_anonymous_allowed %}true{% endif %}">
-                    {% if comment %}{% trans "Reply" %}{% else %}{% trans "Comment" %}{% endif %}
+                    {% if comment %}{% trans "ارسال پاسخ" %}{% else %}{% trans "ارسال دیدگاه" %}{% endif %}
                 </button>
             </div>
         </div>
@@ -29,18 +29,18 @@
         {% if is_anonymous_allowed %}
             <p class="text-muted{% if comment %} h7{% endif %}">
                 {% trans "Comment Anonymously or" %}
-                <a class="text-success" href="{{login_url}}?next={{request.path}}">
-                    <em>{% trans "Login" %}</em>
+                <a class="text-success text-decoration-none" href="{{login_url}}?next={{request.path}}">
+                    <p class="d-inline-block">{% trans "ورود" %}</p>
                 </a>
-                {% trans "to keep your conversations intact" %}
+                {% trans "تا مکالمات خود را دست نخورده نگه دارید..." %}
             </p>
         {% else %}
-            <p class="text-muted {% if comment %}h7{% endif %}">
+            <span class="text-muted {% if comment %}h7{% endif %}">
+                {% trans "برای ارسال دیدگاه: " %}
                 <a class="text-success" href="{{login_url}}?next={{request.path}}">
-                    <em>{% trans "Login" %}</em>
+                    <p class="d-inline-block mr-1">{% trans "وارد شوید" %}</p>
                 </a>
-                {% trans "to join the discussion" %}
-            </p>
+            </span>
         {% endif %}
         {% if oauth %}
             {% block oauth %}
