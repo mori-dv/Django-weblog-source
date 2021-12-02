@@ -14,6 +14,14 @@ class ArticleManager(models.Manager):
         return self.filter(situation='p')
 
 
+class IpAddress(models.Model):
+    ip_address = models.GenericIPAddressField(verbose_name='آدرس آی‌پی')
+
+    class Meta:
+        verbose_name = 'آی‌پی آدرس'
+        verbose_name_plural = 'آی‌پی آدرس ها'
+
+
 class CategoryManager(models.Manager):
     def active(self):
         return self.filter(situation=True)
@@ -71,6 +79,7 @@ class Article(models.Model):
     situation = models.CharField(max_length=1, choices=CHOICES, verbose_name="وضعیت پست")
     is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه')
     comments = GenericRelation(Comment)
+    hits = models.ManyToManyField(IpAddress, blank=True, verbose_name='بازدید ها ')
 
     class Meta:
         verbose_name = "مقاله"

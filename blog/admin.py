@@ -1,6 +1,5 @@
 from django.contrib import admin, messages
-from .models import Article, Category
-from account import models
+from .models import Article, Category, IpAddress
 from django.utils.translation import ngettext
 
 # admin actions
@@ -58,10 +57,11 @@ class AdminInterface(admin.ModelAdmin):
 class CategoryInterface(admin.ModelAdmin):
     list_display = ('position', 'title', 'parent', 'slug', 'situation',)
     list_filter = (['situation'])
-    search_fields = ('title','discribtion')
+    search_fields = ('title', 'discribtion')
     actions = [make_available, make_unavailable]
 
 
 # Register your models here.
 admin.site.register(Article, AdminInterface)
 admin.site.register(Category, CategoryInterface)
+admin.site.register(IpAddress)

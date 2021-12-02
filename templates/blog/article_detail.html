@@ -20,7 +20,8 @@
 
                     <!-- <span class="subheading"> {{ article.subtitle }} </span> -->
                     <div class="m-t-30 text-left">
-                        <time class="float-left"> {{ article.jmodified }} </time>
+                        <span class="d-inline-block"><time class="text-left"> {{ article.jmodified }} </time></span>
+                        <span class="d-block text-center">بازدیدها: {{ article.hits.count }}</span>
                     </div>
                 </div>
             </div>
