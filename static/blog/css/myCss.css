@@ -73,3 +73,15 @@ ul li ul li {
   display:inline-block;
   margin-right:5px;
 }
+.popular-article {
+    width: max-content;
+    height: max-content;
+    text-align: right;
+    padding: 1.2rem;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    position: absolute;
+    left: 15px;
+    top: auto;
+    box-shadow: -5px 5px 15px #d9d9d9d9;
+}

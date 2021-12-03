@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% load comment_tags %}
+{% load base_tag %}
 {% block title %} | {{article.title}} {% endblock %}
 
 {% block main %}
@@ -31,8 +32,9 @@
 
 <!-- Post Content-->
 <article class="mb-4">
-    <div class="container px-4 px-lg-5 text-justify">
-        <div class="row gx-4 gx-lg-5 justify-content-center">
+    <div class="container px-4 px-lg-5 m-b-10 text-justify">
+        {% popular_posts %}
+        <div class="row gx-4 gx-lg-5 justify-content-right">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 {% if object.is_special %}
                     {% if user.is_authenticated and user.is_vip_user or user == object.author or user.is_superuser %}
@@ -60,7 +62,10 @@
             </div>
         </div>
     </div>
-    {% render_comments object request %}
-    {% include_bootstrap %}
+    <div class="py-5 justify-content-right">
+        {% render_comments object request %}
+        {% include_bootstrap %}
+    </div>
+
 </article>
 {% endblock %}

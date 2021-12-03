@@ -1,0 +1,9 @@
+<div class="popular-article">
+    <h2 class="h4">مقالات پر بازدید</h2>
+    <hr>
+    {% for article in popular_posts %}
+        <a href="{% url 'blog:article_detail' article.slug %}" class="d-block text">
+            {{ article.title }}
+        </a>
+    {% endfor %}
+</div>

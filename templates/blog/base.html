@@ -33,10 +33,17 @@
                 <div class="navbar-brand"><a class="text-white" href="{% url 'blog:home' %}"> {% title %} </a></div>
                 {% if request.user.is_author or request.user.is_superuser %}
                     <li class="nav-item acc-link">
-                        <a class="nav-link a px-lg-3 py-lg-4 text-white-50" href="{% url 'account:home' %}"> {{ request.user.get_full_name }}</a>
+                        <a class="nav-link a px-lg-3 py-lg-4 text-white-50" href="{% url 'account:home' %}">
+                            {{ request.user.get_full_name }}
+                        </a>
                     </li>
                 {% endif %}
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarResponsive"
+                        aria-controls="navbarResponsive"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
                     Menu
                     <i class="fa fa-bars"></i>
                 </button>

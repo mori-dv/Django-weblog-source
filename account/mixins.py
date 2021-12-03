@@ -30,8 +30,9 @@ class FormValidMixin:
             self.obj = form.save(commit=False)
             self.obj.author = self.request.user
 
-        if not self.object.situation == 'i':
-            self.object.situation = 'd'
+        if not self.request.user.is_superuser:
+            if self.object.situation != 'i':
+                self.object.situation = 'd'
 
         return super().form_valid(form)
 

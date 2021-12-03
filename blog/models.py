@@ -67,8 +67,8 @@ class Article(models.Model):
     describtion = models.TextField(verbose_name="مقاله")
     slug = models.SlugField(max_length=50, unique=True, verbose_name="آدرس پست")
     modified = models.DateTimeField(default=timezone.now, verbose_name="زمان انتشار")
-    created = models.DateTimeField(auto_now_add=True, verbose_name="زمان تولید")
-    update = models.DateTimeField(auto_now=True, verbose_name="زمان ویرایش")
+    created = models.DateTimeField(auto_now_add=True)
+    update = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(
         User,
         null=True,
@@ -79,7 +79,7 @@ class Article(models.Model):
     situation = models.CharField(max_length=1, choices=CHOICES, verbose_name="وضعیت پست")
     is_special = models.BooleanField(default=False, verbose_name='مقاله ویژه')
     comments = GenericRelation(Comment)
-    hits = models.ManyToManyField(IpAddress, blank=True, verbose_name='بازدید ها ')
+    hits = models.ManyToManyField(IpAddress, through='articlehit', blank=True, verbose_name='بازدید ها ')
 
     class Meta:
         verbose_name = "مقاله"
@@ -108,3 +108,9 @@ class Article(models.Model):
         return self.title
     
     objects = ArticleManager()
+
+
+class ArticleHit(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IpAddress, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
