@@ -15,7 +15,7 @@
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static '/blog/css/styles.css' %}" rel="stylesheet">
+	<link href='{% static "/css/bootstrap.css" %}' rel='stylesheet'>
         <link href="{% static '/blog/css/myCss.css' %}" rel="stylesheet">
     <style>
         .special-post{
@@ -44,7 +44,7 @@
                         aria-controls="navbarResponsive"
                         aria-expanded="false"
                         aria-label="Toggle navigation">
-                    Menu
+			منو
                     <i class="fa fa-bars"></i>
                 </button>
                 {% category_navbar %}
@@ -86,14 +86,13 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="small text-center text-muted fst-italic">Copyright &copy; Your Website 2021</div>
                     </div>
                 </div>
             </div>
         </footer>
         <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src='{% static '/js/bootstrap.js' %}'></script>
         <!-- Core theme JS-->
-        <script src="{% static 'blog/js/scripts.js' %}"></script>
+        <script src="{% static '/blog/js/scripts.js' %}"></script>
     </body>
 </html>
