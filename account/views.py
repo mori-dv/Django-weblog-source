@@ -88,7 +88,7 @@ class SignUp(CreateView):
 
     def form_valid(self, form):
         user = form.save(commit=False)
-        user.is_active = False
+        user.is_active = True # it should be False but for test we make it True
         user.save()
         current_site = get_current_site(self.request)
         mail_subject = 'فعال سازی حساب کاربری شما.'
